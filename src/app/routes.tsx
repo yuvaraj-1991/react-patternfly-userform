@@ -8,6 +8,9 @@ import { ProfileSettings } from '@app/Settings/Profile/ProfileSettings';
 import { NotFound } from '@app/NotFound/NotFound';
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
+import { UserDetails } from '@app/UserDetails/UserDetails';
+import { UserDataForm } from './UserData/UserDataForm';
+import { UserForm } from './UserData/UserForm';
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -64,6 +67,18 @@ const routes: AppRouteConfig[] = [
       },
     ],
   },
+  // {
+  //   component: UserDataForm,
+  //   label: 'User Data Form',
+  //   path: '/userdataform',
+  //   title: 'PatternFly Seed | User Data Form',
+  // },
+  {
+    component: UserForm,
+    label: 'UserDetails',
+    path: '/userform',
+    title: 'PatternFly Seed | User Form',
+  },
 ];
 
 // a custom hook for sending focus to the primary content container
@@ -89,7 +104,7 @@ const RouteWithTitleUpdates = ({ component: Component, isAsync = false, title, .
     return <Component {...rest} {...routeProps} />;
   }
 
-  return <Route render={routeWithTitle} {...rest}/>;
+  return <Route render={routeWithTitle} {...rest} />;
 };
 
 const PageNotFound = ({ title }: { title: string }) => {
