@@ -18,6 +18,12 @@ import { AgeCalc } from './AgeCalc';
 import { func } from 'prop-types';
 
 export const UserDataForm = () => {
+  interface Data {
+    userName: string;
+    userAge: number;
+    userGender: boolean;
+    userFavMon: string;
+  }
   // const initialDefaultValues = {
   //   fullName: '',
   //   gender: '',
@@ -64,11 +70,11 @@ export const UserDataForm = () => {
     <>
       <div>
         <Form>
-          <FormGroup label="Full Name" isRequired fieldId="fullName">
+          <FormGroup label="Name" isRequired fieldId="name">
             <TextInput
-              id="fullName"
+              id="name"
               type="text"
-              name="fullName"
+              name="name"
               value={name}
               onChange={(value) => {
                 setFullName(value);
