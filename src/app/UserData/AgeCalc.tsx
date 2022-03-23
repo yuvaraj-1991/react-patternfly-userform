@@ -10,25 +10,18 @@ export const AgeCalc = ({ setAgeCount }) => {
       count = 0;
     } else {
       setCount(count - 1);
-      handleChange(count - 1);
     }
   }
-
   function increement() {
     setCount(count + 1);
-    handleChange(count + 1);
   }
-
-  const handleChange = (value) => {
-    setAgeCount(value);
-  };
 
   return (
     <div>
       <Button variant="primary" onClick={decreement}>
         -
       </Button>
-      <TextInput id="age-count" type="number" value={count} onChange={handleChange}></TextInput>
+      <TextInput id="age-count" type="number" value={count}></TextInput>
       <Button variant="primary" onClick={increement}>
         +
       </Button>

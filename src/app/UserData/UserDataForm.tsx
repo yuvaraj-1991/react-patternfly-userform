@@ -15,60 +15,51 @@ import {
 } from '@patternfly/react-core';
 import SelectMonth from './SelectMonth';
 import { AgeCalc } from './AgeCalc';
+import { func } from 'prop-types';
 
-export const UserDataForm = ({ usersArray }) => {
-  const initialDefaultValues = {
-    fullName: '',
-    gender: '',
-    age: 0,
-    favMonth: '',
-  };
+export const UserDataForm = () => {
+  // const initialDefaultValues = {
+  //   fullName: '',
+  //   gender: '',
+  //   age: 0,
+  //   favMonth: '',
+  // };
 
-  const [users, setUsers] = useState(initialDefaultValues);
+  // const [users, setUsers] = useState(initialDefaultValues);
+
+  const [name, setName] = useState('');
+  const [age, setAge] = useState(0);
+  const [gender, setGender] = useState('');
+  const [month, setFavMon] = useState('');
 
   //Function to handle name input
   function setFullName(value) {
-    setUsers({
-      ...users,
-      fullName: value,
-    });
+    setName(value);
   }
 
   // Function to submit form
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(users);
-    usersArray.push(users);
+    console.log(name, age, gender, month);
+    // usersArray.push(users);
   }
 
   // Function to clear form
   function clearForm() {
-    setUsers({
-      fullName: '',
-      gender: '',
-      age: 0,
-      favMonth: '',
-    });
+    console.log('cleared');
   }
 
   const onChangeGender = (_: boolean, event: FormEvent<HTMLInputElement>) => {
-    // debugger;
-    // console.log(event.target.value);
-    // const { value } = event.target;
-    setUsers({ ...users, gender: event.target['value'] });
+    setGender(event.target['value']);
   };
 
   function setAgeCount(ageValue) {
-    console.log(ageValue);
-    setUsers({
-      ...users,
-      age: ageValue,
-    });
+    setAge(ageValue);
   }
   const setFavMonth = (selection) => {
-    setUsers({ ...users, favMonth: selection });
+    setFavMon(selection);
   };
-  console.log(usersArray);
+  // console.log(usersArray);
   return (
     <>
       <div>
@@ -78,7 +69,7 @@ export const UserDataForm = ({ usersArray }) => {
               id="fullName"
               type="text"
               name="fullName"
-              value={users.fullName}
+              value={name}
               onChange={(value) => {
                 setFullName(value);
               }}
@@ -91,7 +82,7 @@ export const UserDataForm = ({ usersArray }) => {
 
           <FormGroup label="Gender" fieldId="GenderField" isRequired helperText="Please provide your gender">
             <Radio
-              isChecked={users.gender['Female']}
+              isChecked={gender['Female']}
               label="Female"
               id="radio-button"
               name="gender-radio-button"
@@ -100,7 +91,7 @@ export const UserDataForm = ({ usersArray }) => {
             ></Radio>
 
             <Radio
-              isChecked={users.gender['Male']}
+              isChecked={gender['Male']}
               label="Male"
               id="radio-button"
               name="gender-radio-button"

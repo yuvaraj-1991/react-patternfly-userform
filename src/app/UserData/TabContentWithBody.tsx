@@ -40,7 +40,7 @@ const TabContentWithBody = () => {
         /> */}
         <Tab eventKey={0} title={<TabTitleText>Users</TabTitleText>}>
           Users
-          <UserDataForm usersArray={[]} />
+          <UserDataForm />
         </Tab>
         <Tab eventKey={1} title={<TabTitleText>Form</TabTitleText>}>
           Form Data
@@ -48,34 +48,6 @@ const TabContentWithBody = () => {
           <PaginationTable />
         </Tab>
       </Tabs>
-      {/* <div>
-        <TabContent
-          eventKey={0}
-          id="refTab1Section"
-          ref={contentRef1}
-          aria-label="Tab item 1"
-        >
-          <TabContentBody hasPadding> Tab 1 section </TabContentBody>
-        </TabContent>
-        <TabContent
-          eventKey={1}
-          id="refTab2Section"
-          ref={contentRef2}
-          aria-label="Tab item 2"
-          hidden
-        >
-          <TabContentBody hasPadding> Tab 2 section </TabContentBody>
-        </TabContent>
-        <TabContent
-          eventKey={2}
-          id="refTab3Section"
-          ref={contentRef3}
-          aria-label="Tab item 3"
-          hidden
-        >
-          <TabContentBody hasPadding> Tab 3 section </TabContentBody>
-        </TabContent>
-      </div> */}
     </React.Fragment>
   );
 };
