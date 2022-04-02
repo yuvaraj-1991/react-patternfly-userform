@@ -12,6 +12,7 @@ import {
   SelectOption,
   SelectVariant,
   ActionGroup,
+  Modal,
 } from '@patternfly/react-core';
 import SelectMonth from './SelectMonth';
 import { AgeCalc } from './AgeCalc';
@@ -37,6 +38,16 @@ export const UserDataForm = () => {
   const [age, setAge] = useState(0);
   const [gender, setGender] = useState('');
   const [month, setFavMon] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+
+  //  Function to handle Modal
+  function handleModalToggle() {
+    if (isOpen == true) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+  }
 
   //Function to handle name input
   function setFullName(value) {
@@ -44,8 +55,7 @@ export const UserDataForm = () => {
   }
 
   // Function to submit form
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
     console.log(name, age, gender, month);
     // usersArray.push(users);
   }
@@ -68,6 +78,20 @@ export const UserDataForm = () => {
   // console.log(usersArray);
   return (
     <>
+      <Modal
+        title="Are you Sure?"
+        isOpen={isOpen}
+        actions={[
+          <Button key="confirm" variant="primary" onClick={clearForm}>
+            Confirm
+          </Button>,
+          <Button key="cancel" variant="link" onClick={handleModalToggle}>
+            Cancel
+          </Button>,
+        ]}
+      >
+        Are you sure you want to clear the form Input details please confirm.
+      </Modal>
       <div>
         <Form>
           <FormGroup label="Name" isRequired fieldId="name">
@@ -114,7 +138,7 @@ export const UserDataForm = () => {
             <Button variant="primary" type="submit" onClick={handleSubmit}>
               Submit
             </Button>
-            <Button variant="primary" onClick={clearForm}>
+            <Button variant="primary" onClick={handleModalToggle}>
               Clear
             </Button>
           </ActionGroup>
