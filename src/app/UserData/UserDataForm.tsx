@@ -62,6 +62,10 @@ export const UserDataForm = () => {
 
   // Function to clear form
   function clearForm() {
+    setName('');
+    setAge(0);
+    setGender('');
+    setFavMon('');
     console.log('cleared');
   }
 
@@ -75,6 +79,11 @@ export const UserDataForm = () => {
   const setFavMonth = (selection) => {
     setFavMon(selection);
   };
+
+  function modalClearForm() {
+    clearForm();
+    handleModalToggle();
+  }
   // console.log(usersArray);
   return (
     <>
@@ -82,13 +91,14 @@ export const UserDataForm = () => {
         title="Are you Sure?"
         isOpen={isOpen}
         actions={[
-          <Button key="confirm" variant="primary" onClick={clearForm}>
+          <Button key="confirm" variant="primary" onClick={modalClearForm}>
             Confirm
           </Button>,
           <Button key="cancel" variant="link" onClick={handleModalToggle}>
             Cancel
           </Button>,
         ]}
+        onClose={handleModalToggle}
       >
         Are you sure you want to clear the form Input details please confirm.
       </Modal>
