@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { Button } from '@patternfly/react-core';
 import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
 
-export const AgeCalc = ({ setAgeCount }) => {
-  let [count, setCount] = useState(0);
+export const AgeCalc = ({ setAgeCount, age }) => {
+  // let [count, setCount] = useState(0);
 
   function decreement() {
-    if (count <= 0) {
-      count = 0;
+    if (age <= 0) {
+      setAgeCount = 0;
     } else {
-      setCount(count - 1);
+      setAgeCount(age - 1);
     }
   }
   function increement() {
-    setCount(count + 1);
+    setAgeCount(age + 1);
   }
 
   return (
@@ -21,7 +21,7 @@ export const AgeCalc = ({ setAgeCount }) => {
       <Button variant="primary" onClick={decreement}>
         -
       </Button>
-      <TextInput id="age-count" type="number" value={count}></TextInput>
+      <TextInput id="age-count" type="number" value={age}></TextInput>
       <Button variant="primary" onClick={increement}>
         +
       </Button>

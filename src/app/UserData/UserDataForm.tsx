@@ -37,8 +37,17 @@ export const UserDataForm = () => {
   const [name, setName] = useState('');
   const [age, setAge] = useState(0);
   const [gender, setGender] = useState('');
-  const [month, setFavMon] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [isEnab, setIsEnab] = useState(false);
+  const [isMonthOpen, setIsMonthOpen] = React.useState(false);
+  const [selected, setSelected] = React.useState('');
+
+  const onToggle = (isMonthOpen) => setIsMonthOpen(isMonthOpen);
+
+  const onSelect = (event, selection, isPlaceholder) => {
+    setSelected(selection);
+    setIsMonthOpen(false);
+  };
 
   //  Function to handle Modal
   function handleModalToggle() {
@@ -56,7 +65,7 @@ export const UserDataForm = () => {
 
   // Function to submit form
   function handleSubmit() {
-    console.log(name, age, gender, month);
+    console.log(name, age, gender, selected);
     // usersArray.push(users);
   }
 
@@ -65,7 +74,7 @@ export const UserDataForm = () => {
     setName('');
     setAge(0);
     setGender('');
-    setFavMon('');
+
     console.log('cleared');
   }
 
@@ -76,13 +85,35 @@ export const UserDataForm = () => {
   function setAgeCount(ageValue) {
     setAge(ageValue);
   }
-  const setFavMonth = (selection) => {
-    setFavMon(selection);
-  };
+  // const setFavMonth = (selection) => {
+  //   setFavMon(selection);
+  // };
 
-  function modalClearForm() {
-    clearForm();
-    handleModalToggle();
+  function submitBtnHandle() {
+    if (name && age && gender && selected != '') {
+      console.log('all the data is filled');
+      setIsEnab(true);
+    }
+  }
+
+  function checkVal() {
+    console.log(name.length);
+    console.log(age);
+    console.log(selected);
+    if (name.length && age && selected != '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function modalClearUserForm() {
+    setName('');
+    setAge(0);
+    setGender('');
+    setSelected('');
+    console.log('cleared');
+    setIsOpen(false);
   }
   // console.log(usersArray);
   return (
@@ -91,10 +122,10 @@ export const UserDataForm = () => {
         title="Are you Sure?"
         isOpen={isOpen}
         actions={[
-          <Button key="confirm" variant="primary" onClick={modalClearForm}>
+          <Button key="confirm" variant="primary" onClick={modalClearUserForm}>
             Confirm
           </Button>,
-          <Button key="cancel" variant="link" onClick={handleModalToggle}>
+          <Button key="cancel" variant="link" onClick={() => setIsOpen(false)}>
             Cancel
           </Button>,
         ]}
@@ -117,7 +148,7 @@ export const UserDataForm = () => {
           </FormGroup>
 
           <FormGroup label="Age" isRequired fieldId="ageField">
-            <AgeCalc setAgeCount={setAgeCount} />
+            <AgeCalc setAgeCount={setAge} age={age} />
           </FormGroup>
 
           <FormGroup label="Gender" fieldId="GenderField" isRequired helperText="Please provide your gender">
@@ -141,11 +172,18 @@ export const UserDataForm = () => {
           </FormGroup>
 
           <FormGroup label="Drop Down Favourite Month" isRequired fieldId="setFavMonthField">
-            <SelectMonth setFavMonth={setFavMonth} />
+            <SelectMonth
+              // setFavMonth={setFavMonth}
+              onSelect={onSelect}
+              onToggle={onToggle}
+              isMonthOpen={isMonthOpen}
+              selected={selected}
+            />
           </FormGroup>
 
           <ActionGroup>
-            <Button variant="primary" type="submit" onClick={handleSubmit}>
+            {/* <Button disabled={isEnab} variant="primary" type="submit" onClick={handleSubmit}> */}
+            <Button isDisabled={checkVal()} variant="primary" type="submit" onClick={handleSubmit}>
               Submit
             </Button>
             <Button variant="primary" onClick={handleModalToggle}>

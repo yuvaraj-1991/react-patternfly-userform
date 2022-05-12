@@ -1,10 +1,7 @@
 import React from 'react';
 import { Select, SelectOption } from '@patternfly/react-core';
 
-function SelectMonth({ setFavMonth }) {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState([]);
-
+function SelectMonth({ onToggle, onSelect, selected, isMonthOpen }) {
   const options = [
     <SelectOption key={0} value="Please Choose" isPlaceholder />,
     <SelectOption key={1} value="January" />,
@@ -21,20 +18,6 @@ function SelectMonth({ setFavMonth }) {
     <SelectOption key={12} value="December" />,
   ];
 
-  const onToggle = (isOpen) => setIsOpen(isOpen);
-
-  const onSelect = (event, selection, isPlaceholder) => {
-    setSelected(selection);
-    setFavMonth(selection);
-    setIsOpen(false);
-  };
-
-  // const clearSelection = () => {
-  //   setSelected('');
-  //   setFavMonth(null);
-  //   setIsOpen(false);
-  // };
-
   const titleId = 'placeholder-style-select-option-id';
 
   return (
@@ -47,7 +30,7 @@ function SelectMonth({ setFavMonth }) {
         onSelect={onSelect}
         // onClear={clearSelection}
         selections={selected}
-        isOpen={isOpen}
+        isOpen={isMonthOpen}
         aria-labelledby={titleId}
       >
         {options}
